@@ -174,6 +174,9 @@ function submitReqest (method, urlL,  bodyL = null) {
         alert(' Вы успешно зарегистрировались!')
         submit.disabled = true;
         submit.classList.add('disabled-color');
+        teTl = false;
+        emTr = false;
+        teTx = false;
     })
 }
 
