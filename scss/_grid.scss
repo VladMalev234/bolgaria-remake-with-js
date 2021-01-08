@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    overflow-x: hidden;
+}
+.container {
+    max-width: 1170px;
+    height: 80%;
+    margin: auto;
+    z-index: 40;
+    position: relative;
+}
+
+@media (max-width: 1199px){
+    .container {
+        max-width: 960px;
+    }
+}
+
+//  !Задаем после 991px
+@media (max-width: 991px) {
+    .container {
+        max-width: 750px
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+}

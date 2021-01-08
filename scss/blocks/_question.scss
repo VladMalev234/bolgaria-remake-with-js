@@ -1,0 +1,78 @@
+.question {
+    background: url('../img/question/question.png') no-repeat center top/cover;
+    &-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        &__wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between 10px;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+        &__title {
+            text-transform: uppercase;
+            font-size: 21px;
+            &_fs {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            //mb
+        }
+        &__arrow {
+            border-radius: 50%;
+            padding: 3.5px 8px;
+            border: 1px dashed #fff;
+            margin: 30px 0;
+        }
+
+        &__group {
+         width: 370px;
+         margin-bottom: 10px;
+         position: relative;
+         &_hg {
+            margin-bottom: 5px;
+         }
+        }
+        &__input {
+            background: transparent;
+            color: #fff;
+            &::-webkit-input-placeholder {color: #fff;
+            text-transform: uppercase; font-size: 13px;}
+            &:hover {
+                background: #30c2ff;
+            }
+        }
+        &__submit {
+            padding: 0!important;
+            margin-top: 20px;
+            background: transparent;
+            text-transform: uppercase;
+            color: #fff;
+            @include bold;
+            font-size: 15px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.alert {
+    display: block;
+    width: 100px;
+    //height: 20px;
+    background: red;
+    color: #fff;
+    position: absolute;
+    right: -30%;
+    top: 0%;
+    z-index: 20;
+    font-size: 10px;
+}
+
+.red-line {
+    border: 3px solid red;
+}
