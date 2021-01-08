@@ -1,7 +1,7 @@
 // !Form
 const regexEm = /\w+@gmail\.com$/;
 const regexTe = /\w{3}/;
-const regexTel = /\d{10}\S/;
+const regexTel = /^\d{10}$/;
 const inputMail = document.querySelector('.email');
 const inputTel = document.querySelector('.telephone');
 const inputName = document.querySelector('.name');
@@ -136,7 +136,11 @@ submit.addEventListener('click', (el) => {
         phone: inputTel.value
     };
     // вызываем метод post делаем fetch запрос
-    submitReqest('POST', urlForm,  bodyM);      
+    submitReqest('POST', urlForm,  bodyM);  
+    
+    inputAll.forEach((e) => {
+        e.value = '';
+    })
 })
 
 // функци в которй происходит  запрос
@@ -165,8 +169,11 @@ function submitReqest (method, urlL,  bodyL = null) {
              throw e;
          })
        })// и возвращаем уже обьект с нашими данными
-       .then(res => {
+       .then(res => {     
         console.log(res);
+        alert(' Вы успешно зарегистрировались!')
+        submit.disabled = true;
+        submit.classList.add('disabled-color');
     })
 }
 
