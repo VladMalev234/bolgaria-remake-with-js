@@ -91,3 +91,15 @@
         }
     }
 }
+
+@media (max-width: 460px) {
+    .question {
+
+        &-form {
+            //padding: 40px;
+            &__group {
+                max-width: 240px;
+            }
+        }
+    }
+}

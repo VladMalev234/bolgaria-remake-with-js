@@ -920,6 +920,20 @@ body {
   }
 }
 
+@media (max-width: 440px) {
+  .reviews-slider-wrap {
+    margin-top: 100px;
+    padding: 74px 14px 30px;
+    max-width: 417px;
+  }
+  .arrow-prev {
+    left: -4%;
+  }
+  .arrow-next {
+    right: -4%;
+  }
+}
+
 .question {
   background: url("../img/question/question.png") no-repeat center top/cover;
 }
@@ -1032,6 +1046,12 @@ body {
 @media (max-width: 768px) {
   .question-form__group {
     max-width: 280px;
+  }
+}
+
+@media (max-width: 460px) {
+  .question-form__group {
+    max-width: 240px;
   }
 }
 

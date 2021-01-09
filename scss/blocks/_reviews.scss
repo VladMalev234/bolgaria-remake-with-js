@@ -137,3 +137,24 @@
             }
         }
     }
+
+
+    @media (max-width: 440px) {
+        .reviews {
+            &-slider {
+                &-wrap {
+                    margin-top: 100px;
+                    padding: 74px 14px 30px;
+                    max-width: 417px;
+                }
+            }
+        }
+        .arrow {
+            &-prev {
+                left: -4%;
+            }
+            &-next {
+                right: -4%;
+            }
+        }
+    }
