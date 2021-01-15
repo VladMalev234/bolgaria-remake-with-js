@@ -827,6 +827,10 @@ body {
 }
 
 .reviews-slider__image {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 63% 18%;
+     object-position: 63% 18%;
   position: absolute;
   top: 0%;
   left: -34%;
@@ -861,6 +865,7 @@ body {
 
 .disabled-color {
   opacity: 0.4;
+  cursor: auto !important;
 }
 
 @media (max-width: 1199px) {

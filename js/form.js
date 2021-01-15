@@ -1,5 +1,5 @@
 // !Form
-const regexEm = /\w+@gmail\.com$/;
+const regexEm = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const regexTe = /\w{3}/;
 const regexTel = /^\d{10}$/;
 const inputMail = document.querySelector('.email');
@@ -10,11 +10,12 @@ const submit = document.querySelector('.question-form__submit');
 const inputGroup = document.querySelectorAll('.question-form__group input');
 const inputAll = document.querySelectorAll('.question-form__input');
 // переменные для записи значений true
-let teTl;
-let emTr;
-let teTx;
+
+let isPhoneValidated ;
+let isEmailValidated ;
+let isNameValidated ;
 // переменная для записи body для POST запроса 
-let bodyM;
+//let bodyM;
 
 const urlForm = 'https://jsonplaceholder.typicode.com/users';
 // ставим по умолчанию disabled для кноаки
@@ -45,7 +46,7 @@ function disabled(e) {
                 e.target.classList.remove('red-line');
             }
               //если подтвердилось то записуем true в переменную
-           emTr = true;
+           isEmailValidated  = true;
             //если input не соответствие регулярному выражению
         } else {
             // проверяем есть ли элемент с классом alert
@@ -63,7 +64,7 @@ function disabled(e) {
                 заканчиваться на gmail.com`;
                 //доюавляем класс со стилями
                 divE.classList.add('alert');
-                emTr = true;
+                isEmailValidated  = true;
                 console.log('false');
                 //чтоб не срабатывал input встроенная проверка
                 //return false;
@@ -76,7 +77,7 @@ function disabled(e) {
                 a.querySelector('.alert').remove();
                 e.target.classList.remove('red-line');
             }
-           teTx = true;
+           isNameValidated  = true;
         } else {
                 if(a.querySelector('.alert') == null) {
                     submit.disabled = true;
@@ -86,7 +87,7 @@ function disabled(e) {
                     e.target.insertAdjacentElement('afterEnd', divE);
                     divE.innerHTML = `Поле ${e.target.type} должно содержать не меньше 3 букв`;
                     divE.classList.add('alert');
-                    teTx = false;
+                    isNameValidated  = false;
                     console.log('false');
                     //return false;
                 }
@@ -98,7 +99,7 @@ function disabled(e) {
                     a.querySelector('.alert').remove();
                     e.target.classList.remove('red-line');
                 }
-                teTl = true;
+                isPhoneValidated  = true;
             } else {
                     if(a.querySelector('.alert') == null) {
                         submit.disabled = true;
@@ -109,16 +110,16 @@ function disabled(e) {
                         divE.innerHTML = `Поле ${e.target.type} должно содержать не меньше 10 цифр`;
                         divE.classList.add('alert');
                         console.log('false');
-                        teTl = false;
+                        isPhoneValidated  = false;
                         //return false; 
                     } 
                 }
             } 
             // если все значения перменных true то снимаем disabled  с кнопки
-            if(emTr && teTl && teTx) {
+            if(isEmailValidated  && isPhoneValidated  && isNameValidated ) {
                 submit.disabled = false;
                 submit.classList.remove('disabled-color');
-            }else if(!emTr || !teTl || !teTx){
+            }else if(!isEmailValidated  || !isPhoneValidated  || !isNameValidated ){
                 submit.disabled = true;
                 submit.classList.add('disabled-color');
             }
@@ -130,7 +131,7 @@ submit.addEventListener('click', (el) => {
     // убираем автоматические настройки браузера
     el.preventDefault(); 
     // записываем текущие значения в переменные
-    bodyM = {
+     const bodyM = {
         name: inputName.value,
         mail: inputMail.value,
         phone: inputTel.value
@@ -144,14 +145,14 @@ submit.addEventListener('click', (el) => {
 })
 
 // функци в которй происходит  запрос
-function submitReqest (method, urlL,  bodyL = null) {
+function submitReqest (method, url,  bodyL = null) {
     //console.log(bodyL);
-    //залаем headers для распознавания данных
+    //задаем headers для распознавания данных
     const headers = {
         'Content-Type': 'application/json' 
     }
 
-    return fetch (urlL, {
+    return fetch (url, {
         method: method,
         // приводим значения body к строке
         body: JSON.stringify(bodyL),
@@ -174,9 +175,9 @@ function submitReqest (method, urlL,  bodyL = null) {
         alert(' Вы успешно зарегистрировались!')
         submit.disabled = true;
         submit.classList.add('disabled-color');
-        teTl = false;
-        emTr = false;
-        teTx = false;
+        isPhoneValidated  = false;
+        isEmailValidated  = false;
+        isNameValidated  = false;
     })
 }
 

@@ -10,7 +10,7 @@ const nullElement = {
 }
 
 //в будущем наш массив в который передаютсься данные с запросса
-let cmd;
+let clients;
 const arrowPrew = document.querySelector('.arrow-prev');
 const arrowNext = document.querySelector('.arrow-next');
 const sName = document.querySelector('.reviews-slider__name');
@@ -33,9 +33,7 @@ function getEl(data) {
 }
 
 function requestData (url, method) {
-    const headers = {
-        'Content-Type':'aplication/json'
-    }
+
     return fetch(url, {
         method: method,
     })
@@ -44,15 +42,20 @@ function requestData (url, method) {
        return response.json(); 
     }
     return response.json().
+//для отлавливания ошибок
        catch(error => {
         const e = new Error('Что-то пошло не так');
         e.data = error;
         throw e;
     })
+    //получаем обьект с ключем data который содержит в себе массив
     }).then((reciveData) => {
-        cmd = reciveData.data;
-        cmd.unshift(nullElement);
-        getEl(cmd[0]);
+        //записываем в переменную clients данные обьекта, тоесть получаем именно массив
+        clients = reciveData.data;
+        //для добавления в начало массива первого - нулевого элемета
+        clients.unshift(nullElement);
+        //пердаем в функцию для формирования данных добавленный 1 элемент
+        getEl(clients[0]);
     })
 }
 requestData(urlEL, 'GET');
@@ -62,25 +65,28 @@ arrowNext.addEventListener('click', () => {
     arrowPrew.disabled = false;
     arrowPrew.classList.remove('disabled-color');
     //если текущий индекс = 0 или текущий индекс меньше длины всего массива, увеличиваем текущее значение индекса на 1
-     if(curentIndex === 0||curentIndex < (cmd.length)) {
+     if(curentIndex === 0||curentIndex < (clients.length)) {
         curentIndex ++;
-        // передаем в функцию значения масива текущего индекса
-        getEl(cmd[curentIndex]);
-    } if(curentIndex === (cmd.length -1)){
+        // передаем в функцию значения масива с текущем индексом
+        getEl(clients[curentIndex]);
+    } 
+    // проверяем если текущий индекс = дляны массива -1,это значит, что мы дошли до конца массива и нужно повесить disabe на кнопку
+    if(curentIndex === (clients.length -1)){
         arrowNext.disabled = true;
         arrowNext.classList.add('disabled-color');
     }
 });
 
 arrowPrew.addEventListener('click', () => {
-    //for(let i = 0; i < cmd.length; i--) {
-    //       getEl(cmd[i]);
+    //for(let i = 0; i < clients.length; i--) {
+    //       getEl(clients[i]);
     //}
+    // при нажатии на кнопку в право убираем disable с левой стрелки
     arrowNext.disabled = false;
     arrowNext.classList.remove('disabled-color');
      if(curentIndex > 0) {
         curentIndex --;
-        getEl(cmd[curentIndex]);
+        getEl(clients[curentIndex]);
     } if(curentIndex === 0 ) {
         arrowPrew.disabled = true;
         arrowPrew.classList.add('disabled-color');
